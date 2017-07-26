@@ -54,7 +54,12 @@ __asm__(".pushsection .text; .globl getcontext_light\n"
 #else
 
 extern "C" void getcontext_light(ucontext_t *ctx) {
+#if defined(__ANDROID__)
+    // no getcontext
+    (void)ctx;
+#else
 	getcontext(ctx);
+#endif
 }
 
 #endif

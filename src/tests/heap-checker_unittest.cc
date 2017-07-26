@@ -81,7 +81,11 @@
 #include <execinfo.h>           // backtrace
 #endif
 #ifdef HAVE_GRP_H
+#if !defined(__ANDROID__) || (__ANDROID_API__ >= 26)
 #include <grp.h>                // getgrent, getgrnam
+#else
+#undef HAVE_GRP_H
+#endif
 #endif
 #ifdef HAVE_PWD_H
 #include <pwd.h>

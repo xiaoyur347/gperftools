@@ -41,10 +41,14 @@
 #endif
 
 #include <unistd.h>
-#include <syscall.h>
+#include <sys/syscall.h>
 #include <sys/mman.h>
 #include <errno.h>
 #include "base/linux_syscall_support.h"
+
+#ifdef __ANDROID__
+#define __off64_t off64_t
+#endif
 
 // The x86-32 case and the x86-64 case differ:
 // 32b has a mmap2() syscall, 64b does not.
@@ -206,7 +210,7 @@ extern "C" void* mremap(void* old_addr, size_t old_size, size_t new_size,
   return result;
 }
 
-#ifndef __UCLIBC__
+#if !defined(__UCLIBC__) && !defined(__ANDROID__)
 // libc's version:
 extern "C" void* __sbrk(ptrdiff_t increment);
 

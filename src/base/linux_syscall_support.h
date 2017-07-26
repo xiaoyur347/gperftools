@@ -158,7 +158,7 @@ extern "C" {
 #include <sys/resource.h>
 #include <sys/time.h>
 #include <sys/types.h>
-#include <syscall.h>
+#include <sys/syscall.h>
 #include <unistd.h>
 #include <linux/unistd.h>
 #include <endian.h>
@@ -166,6 +166,10 @@ extern "C" {
 #ifdef __mips__
 /* Include definitions of the ABI currently in use.                          */
 #include <sgidefs.h>
+#endif
+
+#ifdef __ANDROID__
+#define ulong unsigned long
 #endif
 
 #endif
