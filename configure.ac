@@ -464,6 +464,8 @@ AC_LINK_IFELSE([AC_LANG_PROGRAM([#if defined(__GNUC__) && ((__GNUC__ < 4) || (__
 #error mingw doesnt really support tls
 #elif defined(__APPLE__)
 #error OSX __thread support is known to call malloc which makes it unsafe to use from malloc replacement
+#elif defined(__ANDROID__)
+#error Android __thread support is known to call malloc which makes it unsafe to use from malloc replacement
 #endif
 ], [static __thread int p = 0])],
                [AC_DEFINE(HAVE_TLS, 1,
